@@ -7,23 +7,48 @@
 <body>
     <div class="container">
         <h1>Interview Trainer Agent</h1>
-        <form method="post">
-            <input type="text" name="name" placeholder="Your Name" required><br>
-            <input type="text" name="experience" placeholder="Experience Level (e.g., Fresher, 2 years)" required><br>
-            <input type="text" name="role" placeholder="Job Role (e.g., Software Engineer)" required><br>
-            <button type="submit">Generate Questions</button>
-        </form>
+        <div class="chat-box">
+            <div class="user-input">
+                <form method="post">
+                    <input type="text" name="prompt" placeholder="e.g., Help me with interview for role of software engineer." required>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
 
-        {% if submitted %}
-        <div class="result">
-            <h2>Your Interview Questions:</h2>
-            <ul>
-                {% for q in questions %}
-                <li>{{ q }}</li>
-                {% endfor %}
-            </ul>
+            {% if submitted %}
+            <div class="chat">
+                <div class="chat-message user">
+                    <strong>You:</strong> {{ prompt }}
+                </div>
+                <div class="chat-message agent">
+                    <strong>Research Agent:</strong>
+                    <p><b>Here’s a tailored interview preparation guide for the role of <i>{{ role_title }}</i>:</b></p>
+
+                    <ol>
+                        <li><b>🧠 Role-Specific Questions:</b>
+                            <ul>
+                                {% for q in questions %}
+                                <li>{{ q }}</li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li><b>📊 Industry Expectations:</b>
+                            <p>{{ expectations }}</p>
+                        </li>
+                        <li><b>🎭 Behavioral Scenarios:</b>
+                            <p>{{ behavioral }}</p>
+                        </li>
+                        <li><b>🧑‍💼 HR Guidelines:</b>
+                            <p>{{ hr_guidelines }}</p>
+                        </li>
+                        <li><b>✅ Improvement Tips & Sample Answer:</b>
+                            <p>{{ tips }}</p>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 </body>
 </html>
